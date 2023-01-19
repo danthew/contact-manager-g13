@@ -69,6 +69,15 @@ body
     background-color: #482843;
 }
 
+#userContacts{
+    /*visibility: hidden;*/
+}
+
+.contacts{
+    float: left;
+    margin: 2px 80px;
+}
+
 #contactsLabel{
     font-size: 40px;
     margin: 2% 5%;
