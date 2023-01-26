@@ -1,0 +1,145 @@
+#background
+{
+	background-image: url("stone_bricks.png");
+}
+
+#title_border
+{
+	width: fit-content;
+	height: fit-content;
+	margin: auto;
+	background-image: url("spruce_log.png");
+	float: center;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+#title_box
+{
+	display: table;
+	width: fit-content;
+	height: fit-content;
+	margin: auto;
+	padding: 20px;
+	text-align: center;
+	background-image: url("spruce_planks.png");
+	float: center;
+}
+
+#title
+{
+    font-size: 100px;
+    width: 100%;
+	float: center;
+    margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    color: #FFFFFF;
+}
+
+.row
+{
+	content: "";
+	display: table;
+	width: 100%;
+	clear: both;
+}
+
+.column
+{
+	content:"";
+	float: left;
+	width: 50%;
+	display: table;
+	height: 300px;
+}
+
+.break
+{
+	width: 10%;
+	float: left;
+	height: 300px;
+}
+
+.subcolumn
+{
+	width: 80%;
+	height: 300px;
+	margin: auto;
+}
+
+.sign
+{
+	width: 500px;
+	height: 300px;
+	margin: auto;
+	border: #000000;
+	background-image: url("spruce_planks.png");
+	text-align: center;
+}
+
+.sign_border
+{
+	width: fit-content;
+	height: fit-content;
+	margin: auto;
+	background-image: url("spruce_log.png");
+	float: center;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+#heading
+{
+    font-size: 40px;
+    width: 100%;
+	height: 20%;
+	margin-top: 20px;
+	margin-bottom: 0px;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    color: #FFFFFF;
+}
+
+#input_text
+{
+	display: inline-block;
+	text-align: center;
+	height: fit-content;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#input_label 
+{
+    font-size: 20px;
+    width: 100%;
+	margin-left: 0px;
+	margin-right: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    color: #FFFFFF;
+}
+
+#button{
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    color: #FFFFFF;
+    background-color: #482843;
+}
+
+.buttons:hover{
+    background-color: #00d5124f;
+    color: #FFFFFF;
+    opacity: 50%;
+}
