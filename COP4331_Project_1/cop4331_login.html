@@ -2,22 +2,62 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Facebook 2 - Login</title>
-        <link href="styles_cop.css" rel="stylesheet">	
+        <title>Super Epic Project - Login</title>
+        <link href="login_styles.css" rel="stylesheet">	
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     </head>
-    <body>
-        <h1 id="title">FACEBOOK 2</h1>
-        <div id="loginDiv">
-            <label id="label">USERNAME </label><input type="text" id="loginName" placeholder="Username"/><br /><br />
-            <label id="label">PASSWORD </label><input type="password" id="loginPassword" placeholder="Password"/><br /><br />
-            <button id="button" class="buttons" onclick="doLogin()">LOGIN</button><br /><br />
-            <label id="label">FIRST NAME </label><input type="text" id="loginFirst" placeholder="First Name"/><br /><br />
-            <label id="label">LAST NAME </label><input type="password" id="loginLast" placeholder="Last Name"/><br /><br />
-            <label id="label">USERNAME </label><input type="text" id="loginName" placeholder="Username"/><br /><br />
-            <label id="label">PASSWORD </label><input type="password" id="loginPassword" placeholder="Password"/><br /><br />
-            <button id="button" class="buttons" onclick="doRegister()">REGISTER</button>
-            <span id="loginResult"></span>
-        </div>
+    <body id="background">
+		<br /><br />
+		<div id="title_border">
+			<div id="title_box">
+				<h1 id="title">Super Epic Project</h1><br />
+			</div>
+		</div>
+		<br /><br /><br />
+		<div class="row">
+			<div class="column">
+				<div class="break"></div>
+				<div class="subcolumn">
+					<div class="sign_border">
+						<div class="sign">
+							<br />
+							<h1 id="heading">LOGIN</h1><br />
+							<div id="input_text">
+								<label id="input_label">   USERNAME</label><input type="text" id="loginName" placeholder="Username"/><br />
+							</div>
+							<div id="input_text">
+								<label id="input_label">PASSWORD </label><input type="password" id="loginPassword" placeholder="Password"/><br />
+							</div>
+							<button id="button" class="buttons" onclick="doLogin()">LOGIN</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="column">
+				<div class="break"></div>
+				<div class="subcolumn">
+					<div class="sign_border">
+						<div class="sign">
+							<br />
+							<h1 id="heading">REGISTER</h1><br />
+							<div id="input_text">
+								<label id="input_label">FIRST NAME </label><input type="text" id="loginFirst" placeholder="First Name"/><br />
+							</div>
+							<div id="input_text">
+								<label id="input_label">LAST NAME </label><input type="password" id="loginLast" placeholder="Last Name"/><br />
+							</div>
+							<div id="input_text">
+								<label id="input_label">USERNAME </label><input type="text" id="loginName" placeholder="Username"/><br />
+							</div>
+							<div id="input_text">
+								<label id="input_label">PASSWORD </label><input type="password" id="loginPassword" placeholder="Password"/><br />
+							</div>
+							<button id="button" class="buttons" onclick="doRegister()">REGISTER</button>
+							<span id="loginResult"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </body>
 </html>
