@@ -185,19 +185,22 @@ function searchColor()
 	
 }
 function addContact() {
-	let name;
 	let DOB;
 	let email;
 	let phoneNumber;
 
-	name = document.getElementById("contactName").value;
+	firstName = document.getElementById("contactFirstName").value;
+	lastName = document.getElementById("contactLastName").value;
 	DOB = document.getElementById("contactDOB").value;
 	email = document.getElementById("contactEmail").value;
 	phone = document.getElementById("contactPhone").value;
 
+	let userId = localStorage.getItem()
+
 	let payload = {
 		id: userId,
-		n: name,
+		fn: firstName,
+		ln: lastName,
 		birthday: DOB,
 		em: email,
 		pn: phoneNumber
@@ -205,7 +208,61 @@ function addContact() {
 
 	console.log(payload);
 
-	if(payload.id == "" || payload.n == "" || payload.birthday == "" || payload.em == "" || payload.pn == "") {
+	if(payload.id == "" || payload.fn == "" || payload.ln =="" || payload.birthday == "" || payload.em == "" || payload.pn == "") {
+		window.alert("Please fill out all required fields!");
+		return;
+	}
+
+	let newContact = JSON.stringify(payload);
+
+	let url = urlBase + 'LAMPAPI/addContact.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try{
+
+		xhr.send(payload);
+		console.log(payload);
+
+		xhr.onreadystatechange = function() {
+			if(this.readyState == 4 && this.status == 200) {
+				window.alert("Contact created successfully!");
+				return;
+			}
+		}
+		console.log(payload);
+		xhr.send(payload);
+	}
+}
+function editContact() {
+	let DOB;
+	let email;
+	let phoneNumber;
+
+	firstName = document.getElementById("contactFirstName").value;
+	lastName = document.getElementById("contactLastName").value;
+	DOB = document.getElementById("contactDOB").value;
+	email = document.getElementById("contactEmail").value;
+	phone = document.getElementById("contactPhone").value;
+
+	let url = urlBase + 'LAMPAPI/editContact.' + extension;
+
+	let payload = {
+		id: userId,
+		fn: firstName,
+		ln: lastName,
+		birthday: DOB,
+		em: email,
+		pn: phoneNumber
+	};
+
+	let editedContact = JSON.stringify(payload);
+
+	console.log(payload);
+
+	if(payload.id == "" || payload.fn == "" || payload.ln =="" || payload.birthday == "" || payload.em == "" || payload.pn == "") {
 		window.alert("Please fill out all required fields!");
 		return;
 	}
@@ -221,7 +278,7 @@ function addContact() {
 
 		xhr.onreadystatechange = function() {
 			if(this.readyState == 4 && this.status == 200) {
-				window.alert("Contact created successfully!");
+				window.alert("Contact edited successfully!");
 				return;
 			}
 		}
