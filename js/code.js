@@ -47,7 +47,7 @@ function doLogin()
 
 				saveCookie();
 	
-				window.location.href = "color.html";
+				window.location.href = "cop4331_home.html";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -58,6 +58,68 @@ function doLogin()
 	}
 
 }
+function validate(fName, lName, em, uN, pw) {
+
+	let fNameVal = /^[a-zA-Z\s]+$/;
+	let lNameVal = /^[a-zA-Z\s]+$/;
+	let emailVal = /^[a-zA-Z0-9]+@(gmail|hotmail|outlook|yahoo|live)\.com$/;
+	let userNVal = /^[a-zA-Z0-9]{8,}$/;
+	let passWVal = /^(?=.*[0-9])(?=.[!@#$%^&*])[a-zA-Z0-9]!@#$%^&*]{8,}$/;
+
+	if(fNameVal.test(fName.value)) {
+		alert("The last name field requires the use of alphabetical characters only.");
+		return false;
+	}
+	if(emailVal.test(em.value)) {
+		alert("The entered email address is invalid, please try again.");
+		return false;
+	}
+	if(userNVal.test(uN.value)) {
+		alert("The username field requires the use of alphanumeric characters only and must have at least 8 characters.");
+		return false;
+	}
+	if(passWVal.test(pw.value)) {
+		alert("The password field requires the use of at least one number and special character and must have at least 8 characters.");
+		return false;
+	}
+	return true;
+}
+function register() {
+
+	let fName = document.getElementById("registerFirstName").value;
+	let lName = document.getElementById("registerLastName").value;
+	let em = document.getElementById("registerEmailAddress").value;
+	let uN = document.getElementById("registerUsername").value;
+	let pw = document.getElementById("registerPassword").value;
+
+	if(!validate(fName, lName, em, uN, pw)) {
+		return;
+	}
+	let db = ref(urlBase);
+
+	get(child(db, "users/" + uN.value)).then((snapshot) => {
+		if(snapshot.exists()) {
+			alert("Sorry, this username is taken. Please try again.");
+		}
+		else {
+			set(ref(db, "users/" + uN.value),
+			{
+				firName: fName.value,
+				lasName: lName.value,
+				useName: uN.value,
+				pass: pw.value
+			})
+			.then(()=>{
+				alert("You have registered successfully.");
+			})
+			.catch((error)=>{
+				alert("error" + error);
+			})
+		}
+	});
+}
+
+//SubmitEvent.addEventListener('click', register);
 
 function saveCookie()
 {
@@ -185,12 +247,12 @@ function searchColor()
 	
 }
 function addContact() {
+	let fullname;
 	let DOB;
 	let email;
 	let phoneNumber;
 
-	firstName = document.getElementById("contactFirstName").value;
-	lastName = document.getElementById("contactLastName").value;
+	firstName = document.getElementById("contactName").value;
 	DOB = document.getElementById("contactDOB").value;
 	email = document.getElementById("contactEmail").value;
 	phone = document.getElementById("contactPhone").value;
@@ -199,8 +261,7 @@ function addContact() {
 
 	let payload = {
 		id: userId,
-		fn: firstName,
-		ln: lastName,
+		fn: fullname,
 		birthday: DOB,
 		em: email,
 		pn: phoneNumber
@@ -208,7 +269,7 @@ function addContact() {
 
 	console.log(payload);
 
-	if(payload.id == "" || payload.fn == "" || payload.ln =="" || payload.birthday == "" || payload.em == "" || payload.pn == "") {
+	if(payload.id == "" || payload.fn == ""|| payload.birthday == "" || payload.em == "" || payload.pn == "") {
 		window.alert("Please fill out all required fields!");
 		return;
 	}
@@ -235,14 +296,17 @@ function addContact() {
 		console.log(payload);
 		xhr.send(payload);
 	}
+	catch(err) {
+		alert("Something went wrong. PLease check the information entered is correct and try again.")
+	}
 }
 function editContact() {
+	let fullname;
 	let DOB;
 	let email;
 	let phoneNumber;
 
-	firstName = document.getElementById("contactFirstName").value;
-	lastName = document.getElementById("contactLastName").value;
+	fullname = document.getElementById("contactName").value;
 	DOB = document.getElementById("contactDOB").value;
 	email = document.getElementById("contactEmail").value;
 	phone = document.getElementById("contactPhone").value;
@@ -251,8 +315,7 @@ function editContact() {
 
 	let payload = {
 		id: userId,
-		fn: firstName,
-		ln: lastName,
+		fn: fullname,
 		birthday: DOB,
 		em: email,
 		pn: phoneNumber
@@ -262,7 +325,7 @@ function editContact() {
 
 	console.log(payload);
 
-	if(payload.id == "" || payload.fn == "" || payload.ln =="" || payload.birthday == "" || payload.em == "" || payload.pn == "") {
+	if(payload.id == "" || payload.fn == "" || payload.birthday == "" || payload.em == "" || payload.pn == "") {
 		window.alert("Please fill out all required fields!");
 		return;
 	}
@@ -285,4 +348,12 @@ function editContact() {
 		console.log(payload);
 		xhr.send(payload);
 	}
+	catch(err) {
+		alert("Something went wrong. PLease check the information entered is correct and try again.")
+	}
 }
+
+const c = document.getElementById("button");
+console.log(c);
+
+c.click();
