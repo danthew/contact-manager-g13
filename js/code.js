@@ -1,10 +1,10 @@
-
 const urlBase = 'http://COP4331-g13.xyz/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
 let firstName = "";
 let lastName = "";
+let editTarget = 0;
 
 function doLogin()
 {
@@ -116,9 +116,8 @@ function doRegister() {
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
 
-				if(jsonObject.err)
-				document.getElementById("loginResult").innerHTML = "Register Successful";
 				
+				window.alert("You have registered successfully");
 				window.location.href = "cop4331_home.html";
 			}
 		};
@@ -288,7 +287,7 @@ function addContact() {
 
 	let newContact = JSON.stringify(payload);
 
-	let url = urlBase + 'LAMPAPI/AddContact.' + extension;
+	let url = urlBase + 'LAMPAPI/addContact.' + extension;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -311,6 +310,13 @@ function addContact() {
 		alert("Something went wrong. PLease check the information entered is correct and try again.")
 	}
 }
+
+function editPage(target)
+{
+	editTarget = target;
+	window.location.href = "cop4331_edit_contact.html";
+}
+
 function editContact() {
 	let fullname;
 	let DOB;
@@ -322,7 +328,7 @@ function editContact() {
 	email = document.getElementById("contactEmail").value;
 	phone = document.getElementById("contactPhone").value;
 
-	let url = urlBase + 'LAMPAPI/EditContact.' + extension;
+	let url = urlBase + 'LAMPAPI/editContact.' + extension;
 
 	let payload = {
 		id: userId,
