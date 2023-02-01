@@ -84,7 +84,7 @@ function validate(fName, lName, em, uN, pw) {
 	}
 	return true;
 }
-function register() {
+function doRegister() {
 
 	let fName = document.getElementById("registerFirstName").value;
 	let lName = document.getElementById("registerLastName").value;
