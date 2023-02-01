@@ -58,20 +58,19 @@ function doLogin()
 	}
 
 }
-function validate(fName, lName, em, uN, pw) {
+function validate(fName, lName, uN, pw) {
 
-	let fNameVal = /^[a-zA-Z\s]+$/;
-	let lNameVal = /^[a-zA-Z\s]+$/;
-	let emailVal = /^[a-zA-Z0-9]+@(gmail|hotmail|outlook|yahoo|live)\.com$/;
-	let userNVal = /^[a-zA-Z0-9]{8,}$/;
-	let passWVal = /^(?=.*[0-9])(?=.[!@#$%^&*])[a-zA-Z0-9]!@#$%^&*]{8,}$/;
+	let fNameVal = /^[a-zA-Z\s]$/;
+	let lNameVal = /^[a-zA-Z\s]$/;
+	let userNVal = /^[a-zA-Z0-9]$/;
+	let passWVal = /^(?=.*[0-9])(?=.[!@#$%^&*])[a-zA-Z0-9]!@#$%^&*]{7,}$/;
 
 	if(fNameVal.test(fName.value)) {
-		alert("The last name field requires the use of alphabetical characters only.");
+		alert("The first name field requires the use of alphabetical characters only.");
 		return false;
 	}
-	if(emailVal.test(em.value)) {
-		alert("The entered email address is invalid, please try again.");
+	if(lNameVal.test(lName.value)) {
+		alert("The last name field requires the use of alphabetical characters only.");
 		return false;
 	}
 	if(userNVal.test(uN.value)) {
@@ -86,37 +85,50 @@ function validate(fName, lName, em, uN, pw) {
 }
 function doRegister() {
 
-	let fName = document.getElementById("registerFirstName").value;
-	let lName = document.getElementById("registerLastName").value;
-	let em = document.getElementById("registerEmailAddress").value;
-	let uN = document.getElementById("registerUsername").value;
-	let pw = document.getElementById("registerPassword").value;
+	let fName = document.getElementById("loginFirst").value;
+	let lName = document.getElementById("loginLast").value;
+	let uN = document.getElementById("loginName").value;
+	let pw = document.getElementById("loginPassword").value;
 
-	if(!validate(fName, lName, em, uN, pw)) {
+	if(!validate(fName, lName, uN, pw)) {
 		return;
 	}
-	let db = ref(urlBase);
 
-	get(child(db, "users/" + uN.value)).then((snapshot) => {
-		if(snapshot.exists()) {
-			alert("Sorry, this username is taken. Please try again.");
-		}
-		else {
-			set(ref(db, "users/" + uN.value),
+	let payload = {
+		firName: fName,
+		lasName: lName,
+		useName: uN,
+		passWord: pw
+	};
+
+	let jsonPayload = JSON.stringify(payload);
+
+	let url = urlBase + '/Register.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try {
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
 			{
-				firName: fName.value,
-				lasName: lName.value,
-				useName: uN.value,
-				pass: pw.value
-			})
-			.then(()=>{
-				alert("You have registered successfully.");
-			})
-			.catch((error)=>{
-				alert("error" + error);
-			})
-		}
-	});
+				let jsonObject = JSON.parse( xhr.responseText );
+
+				if(jsonObject.err)
+				document.getElementById("loginResult").innerHTML = "Register Successful";
+				
+				window.location.href = "cop4331_home.html";
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("loginResult").innerHTML = err.message;
+	}
+	
 }
 
 //SubmitEvent.addEventListener('click', register);
@@ -276,7 +288,7 @@ function addContact() {
 
 	let newContact = JSON.stringify(payload);
 
-	let url = urlBase + 'LAMPAPI/addContact.' + extension;
+	let url = urlBase + 'LAMPAPI/AddContact.' + extension;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -293,8 +305,7 @@ function addContact() {
 				return;
 			}
 		}
-		console.log(payload);
-		xhr.send(payload);
+		xhr.send(newContact);
 	}
 	catch(err) {
 		alert("Something went wrong. PLease check the information entered is correct and try again.")
@@ -311,7 +322,7 @@ function editContact() {
 	email = document.getElementById("contactEmail").value;
 	phone = document.getElementById("contactPhone").value;
 
-	let url = urlBase + 'LAMPAPI/editContact.' + extension;
+	let url = urlBase + 'LAMPAPI/EditContact.' + extension;
 
 	let payload = {
 		id: userId,
@@ -345,15 +356,9 @@ function editContact() {
 				return;
 			}
 		}
-		console.log(payload);
-		xhr.send(payload);
+		xhr.send(editedContact);
 	}
 	catch(err) {
 		alert("Something went wrong. PLease check the information entered is correct and try again.")
 	}
 }
-
-const c = document.getElementById("button");
-console.log(c);
-
-c.click();
